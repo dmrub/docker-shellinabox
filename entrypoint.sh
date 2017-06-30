@@ -54,6 +54,10 @@ for service in ${SIAB_SERVICE}; do
     COMMAND+=( -s "${service}" )
 done
 
+export SIAB_PORT SIAB_ADDUSER SIAB_DEBUG SIAB_USER SIAB_USERID \
+       SIAB_GROUP SIAB_GROUPID SIAB_SHELL SIAB_HOME SIAB_SUDO \
+       SIAB_SSL SIAB_SERVICE SIAB_PKGS SIAB_SCRIPT SIAB_RUN
+
 if [[ -n "$SIAB_SCRIPT" && "$SIAB_SCRIPT" != "none" ]]; then
     if [[ -f "$SIAB_SCRIPT" ]]; then
         cp "$SIAB_SCRIPT" /siab-script || {

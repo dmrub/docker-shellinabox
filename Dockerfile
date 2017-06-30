@@ -57,7 +57,7 @@ ENV SIAB_USERCSS="Normal:+/etc/shellinabox/options-enabled/00+Black-on-White.css
 
 ADD user-css.tar.gz /
 
-RUN apk add --no-cache bash openssl curl openssh-client sudo && \
+RUN apk add --no-cache bash openssl curl openssh-client sudo su-exec python && \
     rm -rf /var/cache/apk/* && \
     adduser -D -H -h /home/shellinabox shellinabox && \
     mkdir /var/lib/shellinabox
