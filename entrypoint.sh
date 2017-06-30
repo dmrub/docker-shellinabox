@@ -48,13 +48,30 @@ for service in ${SIAB_SERVICE}; do
     COMMAND+=( -s "${service}" )
 done
 
-if [[ "$SIAB_SCRIPT" != "none" ]]; then
-    set +e
-    /usr/bin/curl --fail -L -s -k ${SIAB_SCRIPT} > /prep.sh
-    chmod +x /prep.sh
+if [[ -n "$SIAB_SCRIPT" && "$SIAB_SCRIPT" != "none" ]]; then
+    if [[ -f "$SIAB_SCRIPT" ]]; then
+        cp "$SIAB_SCRIPT" /siab-script || {
+            echo >&2 "Fatal: could not copy $SIAB_SCRIPT to /siab-script"
+            exit 1
+        }
+    else
+        echo "$SIAB_SCRIPT is not a file or is not accessible, trying to download ..."
+        /usr/bin/curl --fail -Lsk "${SIAB_SCRIPT}" > /siab-script || {
+            echo >&2 "Fatal: could not download $SIAB_SCRIPT to /siab-script"
+            exit 1
+        }
+    fi
+    chmod +x /siab-script || {
+        echo >&2 "Fatal: could not set executable flag on /siab-script"
+        exit 1
+    }
     echo "Running ${SIAB_SCRIPT} .."
-    /prep.sh
-    set -e
+    /siab-script
+fi
+
+if [[ -n "$SIAB_RUN" ]]; then
+    echo "Executing: /bin/sh -c $SIAB_RUN"
+    /bin/sh -c "$SIAB_RUN"
 fi
 
 echo "Starting container .."

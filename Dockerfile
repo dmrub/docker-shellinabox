@@ -52,7 +52,8 @@ ENV SIAB_USERCSS="Normal:+/etc/shellinabox/options-enabled/00+Black-on-White.css
   SIAB_SSL=true \
   SIAB_SERVICE=/:LOGIN \
   SIAB_PKGS=none \
-  SIAB_SCRIPT=none
+  SIAB_SCRIPT="" \
+  SIAB_RUN=""
 
 ADD user-css.tar.gz /
 

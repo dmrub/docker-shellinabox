@@ -19,7 +19,8 @@ shellinabox for docker based on alpine linux https://hub.docker.com/r/dmrub/shel
  - **SIAB_SSL** Whether to enable ssl and create certificates on request. Defaults to true.
  - **SIAB_SERVICE** Service strings to use for shellinabox, separated by whitespace. Defaults to local logins */:LOGIN*.
  - **SIAB_PKGS** Packages to be installed before shellinabox starts. Defaults to none.
- - **SIAB_SCRIPT** Script to download and run before shellinabox start. SSL verification is disabled. Defaults to none.
+ - **SIAB_SCRIPT** File name or URI to download and run before shellinabox start. SSL verification is disabled. Defaults to none.
+ - **SIAB_RUN** Commands to run with '/bin/sh -c'. Defaults to empty string.
 
 ## References
 
